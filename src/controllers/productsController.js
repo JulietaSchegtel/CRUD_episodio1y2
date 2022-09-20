@@ -1,8 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-
-const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
-const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+const {loadProducts, storeProducts} = require('../data/productsModule');
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -13,6 +9,7 @@ const controller = {
 
 	// Detail - Detail from one product
 	detail: (req, res) => {
+		const products = loadProducts();
 		const product = products.find(product => product.id === +req.params.id);
 		return res.render('detail', { 
 			product,
@@ -32,6 +29,8 @@ const controller = {
 
 	// Update - Form to edit
 	edit: (req, res) => {
+		const products = loadProducts();
+
 		const product = products.find(product => product.id === +req.params.id);
 		return res.render('product-edit-form',{
 			product
@@ -39,9 +38,10 @@ const controller = {
 	},
 	// Update - Method to update
 	update: (req, res) => {
+		const products = loadProducts();
 		const {name,price,category,discount,description} = req.body;
 
-		const productModify = products.map(product => {
+		const productsModify = products.map(product => {
 			if(product.id === +req.params.id){
 				return {
 					...product,
@@ -55,8 +55,9 @@ const controller = {
 			return product
 		})
 
-		fs.writeFileSync(path.join(__dirname, '..', 'data', 'productsDataBase.json'),JSON.stringify(productModify), 'utf-8')
-		return res.redirect('/')
+		storeProducts(productsModify);
+		
+		return res.redirect('/products/detail/' + req.params.id)
 	},
 
 	// Delete - Delete one product from DB
