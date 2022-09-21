@@ -29,7 +29,7 @@ const controller = {
 
 		const newProduct = {
 			id,
-			name :
+			name,
 		}
 
 	},
