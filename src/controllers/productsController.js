@@ -20,11 +20,18 @@ const controller = {
 
 	// Create - Form to create
 	create: (req, res) => {
-
+		return res.render('product-create-form')
 	},
 	
 	// Create -  Method to store
 	store: (req, res) => {
+		const {name, price,discount,description, category} = req.body
+
+		const newProduct = {
+			id,
+			name :
+		}
+
 	},
 
 	// Update - Form to edit
@@ -56,7 +63,7 @@ const controller = {
 		})
 
 		storeProducts(productsModify);
-		
+
 		return res.redirect('/products/detail/' + req.params.id)
 	},
 
