@@ -142,5 +142,14 @@
       "category": "in-sale",
       "description": "Deja que la música dance cobre vida con EXTRA BASS™ Anima el ambiente con EXTRA BASS™1. Un radiador pasivo trabaja con el parlante monoaural para potenciar los tonos bajos y mejorar los graves, a pesar del tamaño compacto. ",
       "image": "img-parlante-sony.jpg"
+   },
+   {
+      "id": 17,
+      "name": "Notebook Asus Vivobook 15.6 Intel I7 12gb Ram 512gb Ssd",
+      "description": "Su procesador Intel Core i7 de 4 núcleos, está pensado para quienes buscan la máxima exigencia en la productividad. Está destinado a personas que trabajan con programas de diseño, de edición o tienen un nivel de juego alto. Llevará a cabo varios procesos de forma simultánea, sin frenos y te brindará una experiencia excepcional.",
+      "price": 225449,
+      "discount": 0,
+      "image": "default-image.png",
+      "category": "visited"
    }
 ]

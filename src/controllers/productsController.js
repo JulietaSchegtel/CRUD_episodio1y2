@@ -5,6 +5,11 @@ const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 const controller = {
 	// Root - Show all products
 	index: (req, res) => {
+		const products = loadProducts();
+		return res.render('products', {
+			products,
+			toThousand
+		})
 	},
 
 	// Detail - Detail from one product
@@ -26,11 +31,23 @@ const controller = {
 	// Create -  Method to store
 	store: (req, res) => {
 		const {name, price,discount,description, category} = req.body
+		const products = loadProducts();
 
 		const newProduct = {
-			id,
-			name,
+			id : (products[products.length -1].id + 1),
+			name : name.trim(),
+			description : description.trim(),
+			price : +price,
+			discount : +discount,
+			image : 'default-image.png',
+			category
 		}
+
+		const productsModify = [...products, newProduct];
+
+		storeProducts(productsModify);
+
+		return res.redirect('/products');
 
 	},
 
@@ -69,7 +86,13 @@ const controller = {
 
 	// Delete - Delete one product from DB
 	destroy : (req, res) => {
-		// Do the magic
+		const {id} = req.params;
+		const products = loadProducts();
+
+		const productsModify = products.filter(product => product.id !== +id);
+		
+		storeProducts(productsModify);
+		return res.redirect('/products');
 	}
 };
 
